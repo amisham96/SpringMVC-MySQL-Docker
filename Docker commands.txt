@@ -1,0 +1,11 @@
+docket build . -t a30sham/spring_studentapp
+
+docker pull mysql
+
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=<your_password> -e MYSQL_DATABASE=<your_db_name> -d mysql
+
+docker network create <network_name>
+
+docker network connect <network_name> mysql
+
+docker run -p 8080:8080 --net <network_name> -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=<your_password> -d a30sham/studentapp
